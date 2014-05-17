@@ -1,14 +1,10 @@
-#! /bin/bash
-
-docker kill gfdev
-docker rm gfdev
+#! /bin/sh
 
 docker run -d \
-	-v /var/docker/gfdev/elastic:/var/lib/elasticsearch \
-	-v /var/docker/gfdev/graphite:/opt/graphite/storage/whisper \
-	-v /var/docker/gfdev/supervisor:/var/log/supervisor \
+	-v /var/docker/stagemonitor/elastic:/var/lib/elasticsearch \
+	-v /var/docker/stagemonitor/graphite:/opt/graphite/storage/whisper \
+	-v /var/docker/stagemonitor/supervisor:/var/log/supervisor \
 	-p 8080:80 \
-  -p 8081:81 \
-  -p 8125:8125/udp \
+  -p 8181:81 \
   -p 2003:2003/tcp \
-  --name gfdev torkelo/grafana_dev
+  --name stagemonitor stagemonitor/stagemonitor-docker

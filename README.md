@@ -1,4 +1,4 @@
-## Graphite + Carbon + Statsd + Grafana + Elasticsearch
+## Graphite + Carbon + Grafana + Elasticsearch + Kibana
 
 An all-in-one image running graphite and carbon-cache and grafana.
 
@@ -13,12 +13,12 @@ host ports:
 - `7002`: the carbon-cache query port (used by the web interface)
 
 
-´´´
+```
 ./build
 
 ./start
-´´´
+```
 
 modify start to map to the ports and host directories you need.
 
-Modified from https://github.com/SamSaffron/graphite_dockertrue
+Modified from https://github.com/grafana/grafana-docker-dev-env
