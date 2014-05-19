@@ -6,19 +6,27 @@ This image contains a sensible default configuration of graphite and
 carbon-cache. Starting this container will, by default, bind the the following
 host ports:
 
-- `80`: the graphite web interface
-- `81`: the grafana web interface
+- `80`: the grafana (`/grafana`) and kibnana (`/kibana`) web interface
+- `81`: the graphite web interface (`/`)
 - `2003`: the carbon-cache line receiver (the standard graphite protocol)
 - `2004`: the carbon-cache pickle receiver
 - `7002`: the carbon-cache query port (used by the web interface)
 
+You can log into the administrative interface of graphite-web (a Django application) with the username admin and password admin. These passwords can be changed through the web interface.
 
-```
-./build
+NB: Please be aware that by default docker will make the exposed ports accessible from anywhere if the host firewall is unconfigured.
 
-./start
-```
+### Getting started
+ * Edit the settings or leave them default
+ * To build the docker container, execute the build script: `./build`
+ * modify `start` to map to the ports and host directories you need or leave them default
+ * To start the container, execute the start script: `./start`
 
-modify start to map to the ports and host directories you need.
+### Technical details
+By default, this instance of carbon-cache uses the following retention periods
+resulting in whisper files of approximately 290Kb.
 
+    1m:7d,10m:31d,1h:120d,6h:5y
+
+### Notice
 Modified from https://github.com/grafana/grafana-docker-dev-env
