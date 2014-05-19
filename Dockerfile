@@ -3,17 +3,24 @@ from	ubuntu:14.04
 run	echo 'deb http://us.archive.ubuntu.com/ubuntu/ precise universe' >> /etc/apt/sources.list
 run	apt-get -y update
 
-run apt-get -y install software-properties-common
-
-run	apt-get -y install python-software-properties &&\
+run apt-get -y install  software-properties-common
+run	apt-get -y install  python-software-properties &&\
 	apt-get -y update
 
-run     apt-get -y install  python-django-tagging python-simplejson python-memcache \
-			    python-ldap python-cairo python-django python-twisted   \
-			    python-pysqlite2 python-support python-pip gunicorn     \
-			    supervisor nginx-light git wget curl
+# oracle java
+run add-apt-repository  ppa:webupd8team/java &&\
+	apt-get -y update &&\
+	echo debconf shared/accepted-oracle-license-v1-1 select true | \
+    debconf-set-selections &&\
+    echo debconf shared/accepted-oracle-license-v1-1 seen true | \
+    debconf-set-selections &&\
+    apt-get -y install  oracle-java7-installer
 
-# Elastic Search
+run apt-get -y install  supervisor nginx-light git wget curl
+
+run apt-get -y install  python-django-tagging python-simplejson python-memcache \
+						python-ldap python-cairo python-django python-twisted   \
+						python-pysqlite2 python-support python-pip gunicorn
 
 # fake fuse
 run  apt-get install libfuse2 &&\
@@ -25,11 +32,11 @@ run  apt-get install libfuse2 &&\
      cd /tmp ; dpkg-deb -b . /fuse.deb &&\
      cd /tmp ; dpkg -i /fuse.deb
 
+# Elastic Search
 run    cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.deb
 run    cd ~ && dpkg -i elasticsearch-1.1.1.deb && rm elasticsearch-1.1.1.deb
-run    apt-get -y install openjdk-7-jre
 
-# Install required packages
+# Graphite
 #run	pip install whisper
 #run	pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/lib" carbon
 #run	pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/webapp" graphite-web
@@ -41,6 +48,19 @@ run cd /usr/local/src && git clone https://github.com/graphite-project/whisper.g
 run cd /usr/local/src/whisper && git checkout master && python setup.py install
 run cd /usr/local/src/carbon && git checkout 0.9.x && python setup.py install
 run cd /usr/local/src/graphite-web && git checkout 0.9.x && python check-dependencies.py; python setup.py install
+
+# grafana, kibana
+run	mkdir -p /www/data
+run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.5.4.tar.gz &&\
+	tar xzvf grafana-1.5.4.tar.gz && rm grafana-1.5.4.tar.gz &&\
+	mv /tmp/grafana-1.5.4 /www/data/grafana
+run cd /tmp && wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz &&\
+	tar xzvf kibana-3.1.0.tar.gz && rm kibana-3.1.0.tar.gz &&\
+	mv /tmp/kibana-3.1.0 /www/data/kibana
+
+
+######## no 'add' before this line to utilize caching (see http://crosbymichael.com/dockerfile-best-practices.html)
+
 
 # Add graphite config
 add	./graphite/initial_data.json /opt/graphite/webapp/graphite/initial_data.json
@@ -56,19 +76,9 @@ run	chmod 0775 /opt/graphite/storage /opt/graphite/storage/whisper
 run	chmod 0664 /opt/graphite/storage/graphite.db
 run	cd /opt/graphite/webapp/graphite && python manage.py syncdb --noinput
 
-run	mkdir -p /www/data
-# grafana
-run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.5.4.tar.gz &&\
-	tar xzvf grafana-1.5.4.tar.gz && rm grafana-1.5.4.tar.gz &&\
-	mv /tmp/grafana-1.5.4 /www/data/grafana
 
+# grafana, kibana config
 add ./grafana/config.js /www/data/grafana/config.js
-
-# kibana
-run cd /tmp && wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz &&\
-	tar xzvf kibana-3.1.0.tar.gz && rm kibana-3.1.0.tar.gz &&\
-	mv /tmp/kibana-3.1.0 /www/data/kibana
-
 add ./kibana/config.js /www/data/kibana/config.js
 
 # elasticsearch
@@ -77,8 +87,7 @@ add	./elasticsearch/run /usr/local/bin/run_elasticsearch
 # Add system service config
 add	./nginx/nginx.conf /etc/nginx/nginx.conf
 add	./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-# Nginx
-#
+
 # graphite render, es, kibana, grafana
 expose	80
 # graphite
