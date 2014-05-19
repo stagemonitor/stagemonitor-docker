@@ -18,10 +18,10 @@ NB: Please be aware that by default docker will make the exposed ports accessibl
 
 ### Getting started
  * Clone this repo: `git clone https://github.com/stagemonitor/stagemonitor-docker`
- * Edit the settings or leave them default
- * To build the docker container, execute the build script: `./build`
- * Modify `start` to map to the ports and host directories you need or leave them default
- * To start the container, execute the start script: `./start`
+ * Optional: edit the settings
+ * Build the docker container: execute `./build`
+ * Optional: modify `start` to map to the ports and host directories you need
+ * Start the container: execute `./start`
 
 ### Technical details
 By default, this instance of carbon-cache uses the following retention periods
