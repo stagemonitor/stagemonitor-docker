@@ -17,9 +17,10 @@ You can log into the administrative interface of graphite-web (a Django applicat
 NB: Please be aware that by default docker will make the exposed ports accessible from anywhere if the host firewall is unconfigured.
 
 ### Getting started
+ * Clone this repo: `git clone https://github.com/stagemonitor/stagemonitor-docker`
  * Edit the settings or leave them default
  * To build the docker container, execute the build script: `./build`
- * modify `start` to map to the ports and host directories you need or leave them default
+ * Modify `start` to map to the ports and host directories you need or leave them default
  * To start the container, execute the start script: `./start`
 
 ### Technical details
