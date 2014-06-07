@@ -4,7 +4,7 @@ docker run -d \
 	-v /var/docker/stagemonitor/elastic:/var/lib/elasticsearch \
 	-v /var/docker/stagemonitor/graphite:/opt/graphite/storage/whisper \
 	-v /var/docker/stagemonitor/supervisor:/var/log/supervisor \
-	-p 8080:80 \
+	-p 8888:80 \
   -p 8181:81 \
   -p 2003:2003/tcp \
   --name stagemonitor stagemonitor/stagemonitor-docker

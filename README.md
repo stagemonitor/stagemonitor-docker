@@ -11,7 +11,7 @@ ports:
 
 | Host/VM | Container | Description                                                     |
 | ------- | --------- | --------------------------------------------------------------- |
-| `8080`  | `80`      | the grafana (`/grafana`) and kibnana (`/kibana`) web interface  |
+| `8888`  | `80`      | the grafana (`/grafana`) and kibnana (`/kibana`) web interface  |
 | `8181`  | `2003`    | the graphite web interface (`/`)                                |
 | `2003`  | `2003`    | the carbon-cache line receiver (the standard graphite protocol) |
 |         | `2004`    | the carbon-cache pickle receiver                                |
