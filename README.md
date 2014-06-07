@@ -27,7 +27,7 @@ If you are using VirtualBox or simmilar, forward the to your actual host. To do 
 
 | Protocol | Host Port | Guest Port | 
 | -------- | --------- | ---------- |
-| TCP      | 8080      | 8080       |
+| TCP      | 8888      | 8888       |
 | TCP      | 8181      | 8181       |
 | TCP      | 2003      | 2003       |
 | TCP      | 2222      | 22         |
