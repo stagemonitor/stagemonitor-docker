@@ -32,10 +32,6 @@ run  apt-get install libfuse2 &&\
      cd /tmp ; dpkg-deb -b . /fuse.deb &&\
      cd /tmp ; dpkg -i /fuse.deb
 
-# Elastic Search
-run    cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.deb
-run    cd ~ && dpkg -i elasticsearch-1.1.1.deb && rm elasticsearch-1.1.1.deb
-
 # Graphite
 #run	pip install whisper
 #run	pip install --install-option="--prefix=/var/lib/graphite" --install-option="--install-lib=/var/lib/graphite/lib" carbon
@@ -49,11 +45,15 @@ run cd /usr/local/src/whisper && git checkout master && python setup.py install
 run cd /usr/local/src/carbon && git checkout 0.9.x && python setup.py install
 run cd /usr/local/src/graphite-web && git checkout 0.9.x && python check-dependencies.py; python setup.py install
 
+# Elastic Search
+run    cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.2.1.deb
+run    cd ~ && dpkg -i elasticsearch-1.2.1.deb && rm elasticsearch-1.2.1.deb
+
 # grafana, kibana
 run	mkdir -p /www/data
-run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.6.0.tar.gz &&\
-	tar xzvf grafana-1.6.0.tar.gz && rm grafana-1.6.0.tar.gz &&\
-	mv /tmp/grafana-1.6.0 /www/data/grafana
+run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.6.1.tar.gz &&\
+	tar xzvf grafana-1.6.1.tar.gz && rm grafana-1.6.1.tar.gz &&\
+	mv /tmp/grafana-1.6.1 /www/data/grafana
 run cd /tmp && wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz &&\
 	tar xzvf kibana-3.1.0.tar.gz && rm kibana-3.1.0.tar.gz &&\
 	mv /tmp/kibana-3.1.0 /www/data/kibana

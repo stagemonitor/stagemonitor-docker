@@ -1,5 +1,7 @@
 #! /bin/sh
 
+docker rm stagemonitor
+
 docker run -d \
 	-v /var/docker/stagemonitor/elastic:/var/lib/elasticsearch \
 	-v /var/docker/stagemonitor/graphite:/opt/graphite/storage/whisper \
