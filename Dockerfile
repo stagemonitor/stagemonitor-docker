@@ -46,17 +46,17 @@ run cd /usr/local/src/carbon && git checkout 0.9.x && python setup.py install
 run cd /usr/local/src/graphite-web && git checkout 0.9.x && python check-dependencies.py; python setup.py install
 
 # Elastic Search
-run    cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.2.1.deb
-run    cd ~ && dpkg -i elasticsearch-1.2.1.deb && rm elasticsearch-1.2.1.deb
+run    cd ~ && wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.deb
+run    cd ~ && dpkg -i elasticsearch-1.3.4.deb && rm elasticsearch-1.3.4.deb
 
 # grafana, kibana
 run	mkdir -p /www/data
-run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.6.1.tar.gz &&\
-	tar xzvf grafana-1.6.1.tar.gz && rm grafana-1.6.1.tar.gz &&\
-	mv /tmp/grafana-1.6.1 /www/data/grafana
-run cd /tmp && wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz &&\
-	tar xzvf kibana-3.1.0.tar.gz && rm kibana-3.1.0.tar.gz &&\
-	mv /tmp/kibana-3.1.0 /www/data/kibana
+run cd /tmp && wget http://grafanarel.s3.amazonaws.com/grafana-1.8.1.tar.gz &&\
+	tar xzvf grafana-1.8.1.tar.gz && rm grafana-1.8.1.tar.gz &&\
+	mv /tmp/grafana-1.8.1 /www/data/grafana
+run cd /tmp && wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.1.tar.gz &&\
+	tar xzvf kibana-3.1.1.tar.gz && rm kibana-3.1.1.tar.gz &&\
+	mv /tmp/kibana-3.1.1 /www/data/kibana
 
 
 ######## no 'add' before this line to utilize caching (see http://crosbymichael.com/dockerfile-best-practices.html)

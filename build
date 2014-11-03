@@ -1,6 +1,3 @@
 #! /bin/sh
 
-docker kill stagemonitor
-docker rm stagemonitor
-
 docker build -t stagemonitor/stagemonitor-docker .
