@@ -11,7 +11,7 @@ ports:
 
 | Host/VM | Container | Description                                                     |
 | ------- | --------- | --------------------------------------------------------------- |
-| `8888`  | `80`      | the grafana (`/grafana`) and kibnana (`/kibana`) web interface  |
+| `8888`  | `80`      | the grafana (`/grafana/`) and kibnana (`/kibana/`) web interface  |
 | `8181`  | `2003`    | the graphite web interface (`/`)                                |
 | `2003`  | `2003`    | the carbon-cache line receiver (the standard graphite protocol) |
 |         | `2004`    | the carbon-cache pickle receiver                                |
@@ -51,6 +51,11 @@ The `start` script will, by default, mount the following directories:
  * Build the docker container: execute `./build`
  * Optional: modify `start` to map to the ports and host directories you need
  * Start the container: execute `./start`
+ * Open the Dashboards. 
+   * http://[docker-ip]:8888/kibana/`*`
+   * http://[docker-ip]:8888/grafana/`*`
+
+`*` Replace [docker-ip] with `localhost` if you are using native docker or `192.168.59.103`, if you are using boot2docker. If the ip is not working, check `boot2docker ip` for the actual ip. The trailing slash is important.
 
 ### Technical details
 By default, this instance of carbon-cache uses the following retention periods
