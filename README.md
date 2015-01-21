@@ -5,6 +5,25 @@ An all-in-one image running graphite and carbon-cache and grafana.
 This image contains a sensible default configuration of graphite and
 carbon-cache.
 
+### Getting started with DockerHub
+ * execute `docker pull stagemonitor/stagemonitor-docker`
+ * execute the [start](https://github.com/stagemonitor/stagemonitor-docker/blob/master/start) script
+ * Open the Dashboards. 
+   * http://[docker-ip]:8888/kibana/`*`
+   * http://[docker-ip]:8888/grafana/`*`
+
+### Start with custom build
+ * Clone this repo: `git clone https://github.com/stagemonitor/stagemonitor-docker`
+ * Optional: edit the settings
+ * Build the docker container: execute `./build`
+ * Optional: modify `start` to map to the ports and host directories you need
+ * Start the container: execute `./start`
+ * Open the Dashboards. 
+   * http://[docker-ip]:8888/kibana/`*`
+   * http://[docker-ip]:8888/grafana/`*`
+
+`*` Replace [docker-ip] with `localhost` if you are using native docker or `192.168.59.103`, if you are using boot2docker. If the ip is not working, check `boot2docker ip` for the actual ip. The trailing slash is important.
+
 ### Ports
 Starting this container with the `start` script will, by default, bind the the following
 ports:
@@ -21,19 +40,6 @@ You can log into the administrative interface of graphite-web (a Django applicat
 
 NB: Please be aware that by default docker will make the exposed ports accessible from anywhere if the host firewall is unconfigured.
 
-
-### Port Forwarding
-If you are using VirtualBox or simmilar, forward the to your actual host. To do so, open the VirtualBox GUI, select you VM, click on Settings > Network. In the 'Attached to:' dropdown, select NAT, if it wasn't already. Click on Advanced > Port Forwarding and add the following entries:
-
-| Protocol | Host Port | Guest Port | 
-| -------- | --------- | ---------- |
-| TCP      | 8888      | 8888       |
-| TCP      | 8181      | 8181       |
-| TCP      | 2003      | 2003       |
-| TCP      | 2222      | 22         |
-
-
-
 ### Mounted Volumes
 The `start` script will, by default, mount the following directories:
 
@@ -42,20 +48,6 @@ The `start` script will, by default, mount the following directories:
 | /var/docker/stagemonitor/elastic    | /var/lib/elasticsearch        | elasticsearch index files                  |
 | /var/docker/stagemonitor/graphite   | /opt/graphite/storage/whisper | whisper (timeseries) database files        |
 | /var/docker/stagemonitor/supervisor | /var/log/supervisor           | logs for elasticsearch, graphite and nginx |
-
-
-### Getting started
- * If you are using VirtualBox or simmilar, make sure to [forward the ports](https://github.com/stagemonitor/stagemonitor-docker/blob/master/README.md#port-forwarding) to your host.
- * Clone this repo: `git clone https://github.com/stagemonitor/stagemonitor-docker`
- * Optional: edit the settings
- * Build the docker container: execute `./build`
- * Optional: modify `start` to map to the ports and host directories you need
- * Start the container: execute `./start`
- * Open the Dashboards. 
-   * http://[docker-ip]:8888/kibana/`*`
-   * http://[docker-ip]:8888/grafana/`*`
-
-`*` Replace [docker-ip] with `localhost` if you are using native docker or `192.168.59.103`, if you are using boot2docker. If the ip is not working, check `boot2docker ip` for the actual ip. The trailing slash is important.
 
 ### Technical details
 By default, this instance of carbon-cache uses the following retention periods
