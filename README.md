@@ -7,7 +7,7 @@ carbon-cache.
 
 ### Getting started with DockerHub
  * Pull the container `docker pull stagemonitor/stagemonitor-docker`
- * Start the container `docker start stagemonitor`
+ * Download and execute the [start](https://github.com/stagemonitor/stagemonitor-docker/blob/master/start) script
  * Open the Dashboards. 
    * http://[docker-ip]:8888/kibana/`*`
    * http://[docker-ip]:8888/grafana/`*`
