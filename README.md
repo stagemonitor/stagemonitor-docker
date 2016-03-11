@@ -1,3 +1,6 @@
+# This project is deprecated
+Use docker-compose as described in https://github.com/stagemonitor/stagemonitor/wiki/Step-2%3A-Request-Analysis-Dashboard#set-up-with-docker-compose
+
 ## Graphite + Carbon + Grafana + Elasticsearch + Kibana
 
 An all-in-one image running graphite and carbon-cache and grafana.
